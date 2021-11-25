@@ -1,0 +1,2717 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<title>DEVS model metadata specification</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="A DEVS model metadata specification for discoverability, composability and reusability.">
+		<style>		
+		html {
+			font-family: "Segoe UI", "Helvetica Neue", "Droid Sans", Helvetica, Arial, sans-serif;
+		}
+		
+		body { 
+			width: 800px;
+			margin: 0 auto;
+		}
+		
+		pre {
+			font-size: 11px;
+			border: solid thin silver;
+			background: whitesmoke;
+			padding: 8px;
+		}
+		
+		footer {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		
+		h1, h2, h3 {
+			font-weight: normal;
+		}
+		
+		h1 {
+			text-align: center;
+		}
+
+		p {
+			text-align: justify;
+		}
+		
+		a { 
+			text-decoration: none;
+		}
+		
+		ul {
+			list-style: none;
+		}
+		
+		body > ul {
+			padding: 0px;
+		}
+		
+		li {
+			margin: 4px 0px;
+		}
+		
+		table {
+			text-align: left;
+			border: solid thin silver;
+			border-collapse: collapse;
+			width: 100%;
+		}
+		
+		table tbody tr:nth-child(odd) {
+			background: whitesmoke;
+		}
+		
+		table thead tr th {
+			border-bottom: double 4px silver;
+			font-weight: bold;
+		}
+		
+		table td, table th {
+			padding: 4px 10px;
+			vertical-align: top;
+		}
+		
+		table.tb_overview th:nth-child(1),
+		table.tb_overview td:nth-child(1) {
+			width: 110px;
+		}
+		
+		table.tb_overview th:nth-child(3), table th:nth-child(4),
+		table.tb_overview td:nth-child(3), table td:nth-child(4) {
+			width: 75px;
+		}
+		
+		table.tb_overview th:nth-child(3), table th:nth-child(4),
+		table.tb_overview td:nth-child(3), table td:nth-child(4) {
+			text-align: center;
+		}
+		
+		table.tb_element th:first-child {
+			width: 160px;
+		}
+		
+		.right {
+			text-align: right;
+		}
+		
+		.indent-1 {
+			padding-left: 30px;
+		}
+		
+		.indent-2 {
+			padding-left: 44px;
+		}
+		</style>
+	</head>
+	<body>
+		<h1>Metadata specification for Discrete Event Systems <br> Specification (DEVS) simulation models</h1>
+		
+		<p class="right">Version: 1.0</p>
+		<h2>Summary</h2>
+		
+		<p>This metadata specification documents Discrete Event Systems Specification (DEVS) simulation 
+		   models with the goal of supporting model discoverability, composability and reusability. The 
+		   specification aims to strike a balance between convenience and useful preservation of models 
+		   for future use.</p> 
+		
+		<p>The specification subsets relevant elements of the <a title="Go to the Dublin Core Metadata 
+		   Initiative homepage" href="https://www.dublincore.org/" target="_blank">Dublin Core Metadata 
+		   Initiative (DCMI)</a> and adds a DEVS specific set of metadata properties. Most properties of 
+		   the DCMI used are specialized by assuming that the documented resource is a DEVS simulation 
+		   model</p>
+		
+		<h2>Table of contents</h2>
+		<ul>
+			<li><a title="Go to section 1. Specification overview" href="#H1.0">1. Specification overview</a></li>
+			<ul>
+				<li><a title="Go to section 1.1 Descriptive metadata" href="#H1.1">1.1 Descriptive metadata</a></li>
+				<li><a title="Go to section 1.2 Administrative metadata" href="#H1.2">1.2 Administrative metadata</a></li>
+				<li><a title="Go to section 1.3 Technical metadata" href="#H1.3">1.3 Technical metadata</a></li>
+				<li><a title="Go to section 1.4 DEVS specific metadata" href="#H1.4">1.4 DEVS specific metadata</a></li>
+			</ul>
+			<li><a title="Go to section 2. Elements of the specification" href="#H2.0">2. Elements of the specification</a></li>
+			<ul>
+				<li><a title="Go to section 2.1 Elements of descriptive metadata" href="#H2.1">2.1 Elements of descriptive metadata</a></li>
+				<li><a title="Go to section 2.2 Elements of administrative metadata" href="#H2.2">2.2 Elements of administrative metadata</a></li>
+				<li><a title="Go to section 2.3 Elements of technical metadata" href="#H2.3">2.3 Elements of technical metadata</a></li>
+				<li><a title="Go to section 2.4 Elements of DEVS specific metadata" href="#H2.4">2.4 Elements of DEVS specific metadata</a></li>
+			</ul>
+			<li><a title="Go to section 3. Examples" href="#H3.0">3. Examples</a></li>
+			<ul>
+				<li><a title="Go to section 3.1 JSON example" href="#H3.1">3.1 JSON example</a></li>
+				<li><a title="Go to section 3.2 XML example" href="#H3.2">3.2 XML example</a></li>
+			</ul>
+		</ul>
+		
+		<h2 id="H1.0">1. Specification overview</h2>
+						
+		<h3 id="H1.1">1.1 Descriptive metadata</h3>
+		<table class="tb_overview">
+
+			<thead>
+				<tr>
+					<th>element</th>
+					<th>summary</th>
+					<th>mandatory</th>
+					<th>repeatable</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_identifier">identifier</a></td>
+					<td>An unambiguous reference to a resource.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_title">title</a></td>
+					<td>Name given to the model.</td>
+					<td>&times;</td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_alternative">alternative</a></td>
+					<td>Alternative name to the model title.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_creator">creator</a></td>
+					<td>Person or organization responsible for developing the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_contributor">contributor</a></td>
+					<td>Person or organization contributing to the development of the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_type">type</a></td>
+					<td>Identifies whether the DEVS model is “atomic” or “coupled”.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_language">language</a></td>
+					<td>Language of the model (i.e. English, French, etc.)</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_description">description</a></td>
+					<td>A summary description of the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_subject">subject</a></td>
+					<td>A topic for the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_spatial_coverage">spatial_coverage</a></td>
+					<td>Spatial coverage for which the model can be used.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dc_placename">placename</a></td>
+					<td>Name of the location for which the model can be used.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dc_extent">extent</a></td>
+					<td>Spatial coverage specified by geographic extent.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dc_reference">reference</a></td>
+					<td>Spatial reference for the spatial coverage (i.e. epsg 4326).</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dc_x_min">x_min</a></td>
+					<td>Minimum x coordinate for the spatial coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dc_x_max">x_max</a></td>
+					<td>Maximum x coordinate for the spatial coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dc_y_min">y_min</a></td>
+					<td>Minimum y coordinate for the spatial coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dc_y_max">y_max</a></td>
+					<td>Maximum y coordinate for the spatial coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dc_temporal_coverage">temporal_coverage</a></td>
+					<td>Temporal coverage for which the model can be used.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dc_start">start</a></td>
+					<td>Start date or time of the temporal coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dc_end">end</a></td>
+					<td>End date or time of the temporal coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dc_scheme">scheme</a></td>
+					<td>Date or time schema used to represent the temporal coverage.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h3 id="H1.2">1.2 Administrative metadata</h3>
+		<table class="tb_overview">
+
+			<thead>
+				<tr>
+					<th>element</th>
+					<th>summary</th>
+					<th>mandatory</th>
+					<th>repeatable</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_ad_license">license</a></td>
+					<td>A legal document giving official permission to do something with the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h3 id="H1.3">1.3 Technical metadata</h3>
+		<table class="tb_overview">
+
+			<thead>
+				<tr>
+					<th>element</th>
+					<th>summary</th>
+					<th>mandatory</th>
+					<th>repeatable</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_tc_created">created</a></td>
+					<td>Date of creation for the model.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_tc_modified">modified</a></td>
+					<td>Date on which the model was changed.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h3 id="H1.4">1.4 DEVS specific metadata</h3>
+		<table class="tb_overview">
+
+			<thead>
+				<tr>
+					<th>element</th>
+					<th>summary</th>
+					<th>mandatory</th>
+					<th>repeatable</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_time">time</a></td>
+					<td>Time representation used for the model.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_behavior">behavior</a></td>
+					<td>High level description of the model’s behavior.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_state">state</a></td>
+					<td>State of the model. Only applicable to "atomic" models.</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_description_1">description</a></td>
+					<td>High level description of the model’s state.</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_message_1">message</a></td>
+					<td>State message type unique identifier.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_subcomponent">subcomponent</a></td>
+					<td>A subcomponent model instance of the coupled model, only applicable for “coupled” models.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_identifier_1">identifier</a></td>
+					<td>Unique identifier for the subcomponent.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_model">model</a></td>
+					<td>Unique identifier reference for the model used for the subcomponent.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_coupling">coupling</a></td>
+					<td>A coupling between an origin and destination model, only applicable for “coupled” models.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_from_model">from_model</a></td>
+					<td>Origin subcomponent unique identifier for the coupling.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_from_port">from_port</a></td>
+					<td>Origin subcomponent port for the coupling.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_to_model">to_model</a></td>
+					<td>Destination subcomponent unique identifier for the coupling.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_to_port">to_port</a></td>
+					<td>Destination subcomponent port for the coupling.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_port">port</a></td>
+					<td>An input or output port of the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_type_1">type</a></td>
+					<td>Indicates whether the port is an “input” port or an “output” port.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_name_1">name</a></td>
+					<td>Non unique name of the port.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_message_2">message</a></td>
+					<td>Message type unique identifier.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a title="Go to detailed description" href="#el_dv_message_3">message</a></td>
+					<td>Message type used by the model.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_identifier_2">identifer</a></td>
+					<td>Unique identifier for the message type.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-1"><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+					<td>A field of the message type.</td>
+					<td>&times;</td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dv_name_2">name</a></td>
+					<td>Name of the field, unique within the message type.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dv_description_2">description</a></td>
+					<td>Description of the field.</td>
+					<td></td>
+					<td>&times;</td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dv_type_2">type</a></td>
+					<td>Indicates whether the field value is “nominal”, “numerical” or “ordinal”.</td>
+					<td>&times;</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dv_uom">uom</a></td>
+					<td>Unit of measure used for the field, only for “numerical” values.</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dv_scalar">scalar</a></td>
+					<td>Scalar factor applied to the value, only for “numerical” values.</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="indent-2"><a title="Go to detailed description" href="#el_dv_decimals">decimals</a></td>
+					<td>Number of decimal digits, only for “numerical” values.</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>		
+		
+		<h2 id="H2.0">2. Elements of the specification</h2>
+		
+		<p>Each element of the specification is described using the following attributes:</p>
+		
+		<table class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>The human-readable label assigned to the element.</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A statement that represents the concept and essential nature of the element.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Additional information about the element or its application.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>Indicates whether the element is "mandatory", "optional" and/or "repeatable".</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td>An element of which the described term is a Sub-element.</td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td>A list of acceptable values for this element.</td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td>A series of example values that can be assigned to the element.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3 id="H2.1">2.1 Elements of descriptive metadata</h3>
+		
+		<table id="el_dc_identifier" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: identifier</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>identifier</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>An unambiguous reference to a resource.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to identify the resource by means of a string conforming to an identification system (i.e. UUID).</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_title" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: title</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>title</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Name given to the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_alternative" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: alternative</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>alternative</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Alternative name to the model title.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>The distinction between titles and alternative titles is model-specific.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_creator" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: creator</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>creator</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Person or organization responsible for developing the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_contributor" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: contributor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>contributor</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Person or organization contributing to the development of the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>The guidelines for using names of persons or organizations as creators apply to contributors.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_type" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>type</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Identifies whether the DEVS model is “atomic” or “coupled”.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td>atomic, coupled</td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_language" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: language</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>language</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Language of the model (i.e. English, French, etc.)</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to use either a non-literal value representing a language from a controlled vocabulary such as ISO 639-2 or ISO 639-3, or a literal value consisting of an IETF Best Current Practice 47 [IETF-BCP47] language tag.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_description" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>description</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A summary description of the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_subject" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: subject</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>subject</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A topic for the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to refer to the subject with a literal value that identifies the subject. It should preferably refer to a subject in a controlled vocabulary.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_spatial_coverage" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: spatial_coverage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>spatial coverage</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Spatial coverage for which the model can be used.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_placename" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: placename</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>placename</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Name of the location for which the model can be used.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>A place name may be a location specified by name (i.e. Ottawa) or by its geographic coordinates.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_spatial_coverage">spatial_coverage</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_extent" class="tb_element">			
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: extent</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>extent</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Spatial coverage specified by geographic extent.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_spatial_coverage">spatial_coverage</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_reference" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: reference</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>reference</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Spatial reference for the spatial coverage (i.e. epsg 4326).</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to use a URI based reference to a spatial reference from <a title="Go to the spatial reference homepage" href="https://spatialreference.org/" target="_blank">spatialreference.org</a></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_extent">extent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td>https://spatialreference.org/ref/epsg/4326/json/<br>
+						https://spatialreference.org/ref/sr-org/7483/json/
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_x_min" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: x_min</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>x min</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Minimum x coordinate for the spatial coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Coordinate values must be provided using the spatial reference specified for the extent.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_extent">extent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_x_max" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: x_max</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>x max</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Maximum x coordinate for the spatial coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Coordinate values must be provided using the spatial reference specified for the extent.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_extent">extent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_y_min" class="tb_element">
+
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: y_min</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>y min</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Minimum y coordinate for the spatial coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Coordinate values must be provided using the spatial reference specified for the extent.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_extent">extent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_y_max" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: y_max</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>y max</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Maximum y coordinate for the spatial coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Coordinate values must be provided using the spatial reference specified for the extent.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_extent">extent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_temporal_coverage" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: temporal_coverage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>temporal coverage</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Temporal coverage for which the model can be used.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_start" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: start</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>start</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Start date or time of the temporal coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Start date must be provided using the time schema specified for the temporal coverage.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_temporal_coverage">temporal_coverage</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_end" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: end</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>end</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>End date or time of the temporal coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>End date must be provided using the time schema specified for the temporal coverage.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_temporal_coverage">temporal_coverage</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dc_scheme" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: scheme</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>scheme</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Date or time schema used to represent the temporal coverage.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to use a well known time schema such as <a title="Go to the ISO-8601 homepage" href="https://www.iso.org/iso-8601-date-and-time-format.html" target="_blank">ISO-8601</a></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dc_temporal_coverage">temporal_coverage</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<h3 id="H2.2">2.2 Elements of administrative metadata</h3>
+		
+		<table id="el_ad_license" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: license</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>license</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A legal document giving official permission to do something with the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to identify the license document with a URI. If this is not possible or feasible, a literal value that identifies the license may be provided.</td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+				
+		<h3 id="H2.3">2.3 Elements of technical metadata</h3>
+		
+		<table id="el_tc_created" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: created</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>created</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Date of creation for the model.	</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to specify the date using a well known time schema such as <a title="Go to the ISO-8601 homepage" href="https://www.iso.org/iso-8601-date-and-time-format.html" target="_blank">ISO-8601</a></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_tc_modified" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: modified</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>modified</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Date on which the model was changed.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td>Recommended practice is to specify the date using a well known time schema such as <a title="Go to the ISO-8601 homepage" href="https://www.iso.org/iso-8601-date-and-time-format.html" target="_blank">ISO-8601</a></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h3 id="H2.4">2.4 Elements of DEVS specific metadata</h3>
+		
+		<table id="el_dv_time" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>time</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Time representation used for the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_behavior" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: behavior</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>behavior</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>High level description of the model’s behavior.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_state" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: state</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>state</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>State of the model. Only applicable to "atomic" models.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_description_1" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>description</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>High level description of the model’s state.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_state">state</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_message_1" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: message</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>message</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>State message type unique identifier.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_state">state</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_subcomponent" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: subcomponent</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>subcomponent</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A subcomponent model instance of the coupled model, only applicable for “coupled” models.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_identifier_1" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: identifier</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>identifier</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Unique identifier for the subcomponent.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_subcomponent">subcomponent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_model" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: model</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>model</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Unique identifier reference for the model used for the subcomponent.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_subcomponent">subcomponent</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_coupling" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: coupling</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>coupling</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A coupling between an origin and destination model, only applicable for “coupled” models.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_from_model" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: from_model</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>from model</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Origin subcomponent unique identifier for the coupling.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_coupling">coupling</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_from_port" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: from_port</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>from port</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Origin subcomponent port for the coupling.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_coupling">coupling</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_to_model" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: to_model</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>to model</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Destination subcomponent unique identifier for the coupling.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_coupling">coupling</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_to_port" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: to_port</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>to port</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Destination subcomponent port for the coupling.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_coupling">coupling</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_port" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: port</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>port</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>An input or output port of the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_type_1" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>type</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Indicates whether the port is an “input” port or an “output” port.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_port">port</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_name_1" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>name</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Non unique name of the port.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_port">port</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_message_2" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: message</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>message</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Message type unique identifier.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_port">port</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_message_3" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: message</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>message</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Message type used by the model.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_identifier_2" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: identifier</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>identifier</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Unique identifier for the message type.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_message_3">message</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_field" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: field</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>field</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>A field of the message type.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_message_3">message</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_name_2" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>name</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Name of the field, unique within the message type.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_description_2" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>description</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Description of the field.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional, repeatable</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_type_2" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>type</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Indicates whether the field value is “nominal”, “numerical” or “ordinal”.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>mandatory</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_uom" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: uom</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>uom</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Unit of measure used for the field, only for “numerical” values.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_scalar" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: scalar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>scalar</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Scalar factor applied to the value, only for “numerical” values.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<table id="el_dv_decimals" class="tb_element">
+			<thead>
+				<tr>
+					<th colspan=2>Element Name: decimals</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Label</th>
+					<td>decimals</td>
+				</tr>
+				<tr>
+					<th>Definition</th>
+					<td>Number of decimal digits, only for “numerical” values.</td>
+				</tr>
+				<tr>
+					<th>Comment</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Cardinality</th>
+					<td>optional</td>
+				</tr>
+				<tr>
+					<th>Sub-element of</th>
+					<td><a title="Go to detailed description" href="#el_dv_field">field</a></td>
+				</tr>
+				<tr>
+					<th>Domain</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Examples</th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h2 id="H3.0">3. Examples</h2>
+		<h3 id="H3.1">3.1 JSON example</h3>
+		<pre>
+{
+   "identifier": "b867ca77-ee01-46bc-9ee2-71a0110f13f2",
+   "title": "Hospital Case Load",
+   "alternative": "HCL",
+   "creator": "Bruno St-Aubin",
+   "contributor": ["Carleton University", "ARSLab"],
+   "type": "coupled",
+   "language": ["en-ca", "fr-ca"],
+   "description": "Geographic areas generate emergency periodically. Emergencies are sent to 3 closest hospitals by 
+                   road network. If the hospitals have capacity, they are accepted otherwise rejected.",
+   "subject": ["network", "web", "computer systems"],
+   "spatial coverage": [{
+      "placename": "Ottawa",
+      "extent": {
+         "reference": "epsg:4326",
+         "x min": -76.037,
+         "x max": -75.243
+         "y min": 45.151,
+         "y max": 45.489,
+      }
+   },{
+      "placename": Gatineau",
+      "extent": {
+         "reference": "epsg:4326",
+         "x min": -76.070,
+         "x max": -75.306
+         "y min": 45.402,
+         "y max": 45.685,
+      }
+   }],
+   "temporal coverage": {
+      "start": "2020-01-01",
+      "end": 2022-01-01",
+      "scheme": "ISO 8601",
+   },
+   "license": "MIT License",
+   "created": "2020-05-11",
+   "modified": ["2021-02-13", "2021-03-28", "2021-07-06"],
+   "time": "NDTime",
+   "behavior": "Every 24 hours, a random number of emergencies are generated by a geographic area. The number of emergencies 
+                is proportional to the population count of the area and uses a random factor for variance. Emergencies are sent 
+                to the first closest hospital by driving distance. Hospitals have a capacity and a number of active cases. If
+                a hospital is over capacity, the emergency is rejected and returned to the geographic area. The area then sends 
+                it to the second hospital, then third hospital to be processed. If the emergencies are rejected by all 3
+                hospitals, they are counted as casualties.",
+   "state": null,
+   "subcomponent": [{
+      "identifier": "773656ca-169c-4858-9a94-1814da118156",
+      "name": "generator"
+   },{
+      "identifier": "1dbb558d-813d-4b0e-81a2-18f071848fc0",
+      "name": "receiver"
+   },{
+      "identifier": "3c185942-6e91-40c6-9cad-aa02d7d94a50",
+      "name": "subnet"
+   },{
+      "identifier": "da168216-d2a3-4a6a-ba1d-4685b8e0b893",
+      "name": "network"
+   }],
+   "port": [{
+      "type": "output",
+      "name": "rejected",
+      "message": 1
+   },
+   "message":[{
+      "identifier": 1,
+      "field": [{
+         "name": "area",
+         "description": "geographic area id that rejected the emergencies.",
+         "type": "nominal"
+      },{
+         "name": "count",
+         "description": "number of emergencies rejected by the geographic area.",
+         "type": "numerical",
+         "uom": "persons",
+         "scalar": "unit",
+         "decimals": 0
+      }]
+   }]
+}
+		</pre>
+		
+		<h3 id="H3.2">3.2 XML example</h3>
+		<pre lang="xml">
+&lt;metadata&gt;
+   &lt;identifier&gt;b867ca77-ee01-46bc-9ee2-71a0110f13f2&lt;/identifier&gt;
+   &lt;title&gt;Hospital Case Load&lt;/title&gt;
+   &lt;creator&gt;Bruno St-Aubin&lt;/creator&gt;
+   &lt;contributor&gt;Carleton University&lt;/contributor&gt;
+   &lt;contributor&gt;ARSLab&lt;/contributor&gt;
+   &lt;type&gt;coupled&lt;/type&gt;
+   &lt;language&gt;en-ca&lt;/language&gt;
+   &lt;language&gt;fr-ca&lt;/language&gt;
+   &lt;description&gt;Geographic areas generate emergency periodically. Emergencies are sent to 3 closest hospitals by road network. 
+		If the hospitals have capacity, they are accepted otherwise rejected.&lt;/description&gt;
+   &lt;subject&gt;network&lt;/subject&gt;
+   &lt;subject&gt;web&lt;/subject&gt;
+   &lt;subject&gt;computer systems&lt;/subject&gt;
+   &lt;spatial_coverage&gt;
+      &lt;placename&gt;Ottawa&lt;/placename&gt;
+      &lt;extent&gt;
+         &lt;reference&gt;epsg:4326&lt;/reference&gt;
+         &lt;x_min&gt;-76.037&lt;/x_min&gt;
+         &lt;x_max&gt;-75.243&lt;/x_max&gt;
+         &lt;y_min&gt;45.151&lt;/y_min&gt;
+         &lt;y_max&gt;45.489&lt;/y_max&gt;
+      &lt;/extent&gt;
+   &lt;/spatial_coverage&gt;
+   &lt;spatial_coverage&gt;
+      &lt;placename&gt;Gatineau&lt;/placename&gt;
+      &lt;extent&gt;
+         &lt;reference&gt;epsg:4326&lt;/reference&gt;
+         &lt;x_min&gt;-76.070&lt;/x_min&gt;
+         &lt;x_max&gt;-75.306&lt;/x_max&gt;
+         &lt;y_min&gt;45.402&lt;/y_min&gt;
+         &lt;y_max&gt;45.685&lt;/y_max&gt;
+      &lt;/extent&gt;
+   &lt;/spatial_coverage&gt;
+   &lt;temporal_coverage&gt;
+      &lt;start&gt;2020-01-01&lt;/start&gt;
+      &lt;end&gt;2022-01-01&lt;/end&gt;
+      &lt;scheme&gt;ISO 8601&lt;/scheme&gt;
+   &lt;/temporal_coverage&gt;
+   &lt;license&gt;MIT License&lt;/license&gt;
+   &lt;created&gt;2020-05-11&lt;/created&gt;
+   &lt;modified&gt;2021-02-13&lt;/modified&gt;
+   &lt;modified&gt;2021-03-28&lt;/modified&gt;
+   &lt;modified&gt;2021-07-06&lt;/modified&gt;
+   &lt;time&gt;NDTime&lt;/time&gt;
+   &lt;behavior&gt;Every 24 hours, a random number of emergencies are generated by a geographic area. The number of emergencies is 
+	     proportional to the population count of the area and uses a random factor for variance. Emergencies are sent to 
+		 the first closest hospital by driving distance. Hospitals have a capacity and a number of active cases. If a 
+		 hospital is over capacity, the emergency is rejected and returned to the geographic area. The area then sends 
+		 it to the second hospital, then third hospital to be procesed. If the emergencies are rejected by all 3 
+		 hospitals, they are counted as casualties.&lt;/behavior&gt;
+   &lt;state&gt;&lt;/state&gt;
+   &lt;subcomponent&gt;
+      &lt;identifier&gt;773656ca-169c-4858-9a94-1814da118156&lt;/identifier&gt;
+      &lt;name&gt;generator&lt;/name&gt;
+   &lt;/subcomponent&gt;
+   &lt;subcomponent&gt;
+      &lt;identifier&gt;1dbb558d-813d-4b0e-81a2-18f071848fc0&lt;/identifier&gt;
+      &lt;name&gt;receiver&lt;/name&gt;
+   &lt;/subcomponent&gt;
+   &lt;subcomponent&gt;
+      &lt;identifier&gt;3c185942-6e91-40c6-9cad-aa02d7d94a50&lt;/identifier&gt;
+      &lt;name&gt;subnet&lt;/name&gt;
+   &lt;/subcomponent&gt;
+   &lt;subcomponent&gt;
+      &lt;identifier&gt;da168216-d2a3-4a6a-ba1d-4685b8e0b893&lt;/identifier&gt;
+      &lt;name&gt;network&lt;/name&gt;
+   &lt;/subcomponent&gt;
+   &lt;port&gt;
+      &lt;type&gt;output&lt;/type&gt;
+      &lt;name&gt;rejected&lt;/name&gt;
+      &lt;message&gt;1&lt;/message&gt;
+   &lt;/port&gt;
+   &lt;message&gt;
+      &lt;identifier&gt;1&lt;/identifier&gt;
+      &lt;field&gt;
+         &lt;name&gt;area&lt;/name&gt;
+         &lt;description&gt;geographic area id that rejected the emergencies.&lt;/description&gt;
+         &lt;type&gt;nominal&lt;/type&gt;
+      &lt;/field&gt;
+      &lt;field&gt;
+         &lt;name&gt;count&lt;/name&gt;
+         &lt;description&gt;number of emergencies rejected by the geographic area.&lt;/description&gt;
+         &lt;type&gt;numerical&lt;/type&gt;
+         &lt;uom&gt;persons&lt;/uom&gt;
+         &lt;scalar&gt;unit&lt;/scalar&gt;
+         &lt;decimals&gt;0&lt;/decimals&gt;
+      &lt;/field&gt;
+   &lt;/message&gt;
+&lt;/metadata&gt;
+		</pre>
+		
+		<hr>
+		
+		<footer>
+			Licensed under a <a title="Go to the Creative Commons homepage" rel="license" target="_blank" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+			<br>
+			Copyright ©2021, <a href="mailto:staubin.bruno@gmail.com">Bruno St-Aubin</a>.
+		</footer>
+	</body>
+</html>

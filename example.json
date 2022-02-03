@@ -23,7 +23,7 @@
       "extent": {
          "reference": "epsg:4326",
          "x min": -76.070,
-         "x max": -75.306
+         "x max": -75.306,
          "y min": 45.402,
          "y max": 45.685,
       }
@@ -43,7 +43,10 @@
                 a hospital is over capacity, the emergency is rejected and returned to the geographic area. The area then sends 
                 it to the second hospital, then third hospital to be processed. If the emergencies are rejected by all 3
                 hospitals, they are counted as casualties.",
-   "state": null,
+   "state": {
+	   "description":"",
+	   "message" : ""
+   },
    "subcomponent": [{
       "identifier": "generator_1",
       "model": "75b388da-5ac6-11ec-bf63-0242ac130002"
@@ -59,6 +62,12 @@
    },{
       "identifier": "network_2",
       "model": "856306b6-5ac6-11ec-bf63-0242ac130002"
+   }],
+   "coupling": [{
+	   "from_model":"",
+	   "from_port":"",
+	   "to_model":"",
+	   "to_port":""
    }],
    "port": [{
       "type": "output",

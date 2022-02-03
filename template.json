@@ -1,0 +1,61 @@
+{
+   "identifier": "",
+   "title": [""],
+   "alternative": [""],
+   "creator": [""],
+   "contributor": [""],
+   "type": "",
+   "language": [""],
+   "description": [""],
+   "subject": [""],
+   "spatial coverage": [{
+      "placename": [""],
+      "extent": [{
+         "reference": "",
+         "x min": -1,
+         "x max": -1,
+         "y min": -1,
+         "y max": -1,
+      }]
+   }],
+   "temporal coverage": [{
+      "start": "",
+      "end": "",
+      "scheme": "",
+   }],
+   "license": [""],
+   "created": "",
+   "modified": [""],
+   "time": "",
+   "behavior": [""],
+   "state": {
+	   "description":"",
+	   "message" : ""
+   },
+   "subcomponent": [{
+      "identifier": "",
+      "model": ""
+   }],
+   "coupling": [{
+	   "from_model":"",
+	   "from_port":"",
+	   "to_model":"",
+	   "to_port":""
+   }],
+   "port": [{
+      "type": "",
+      "name": "",
+      "message": -1
+   }],
+   "message":[{
+      "identifier": 1,
+      "field": [{
+         "name": "",
+         "description": "",
+         "type": "",
+         "uom": "",
+         "scalar": "",
+         "decimals": -1
+      }]
+   }]
+}
